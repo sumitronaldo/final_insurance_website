@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Dashboard</title>
+    <link rel='stylesheet' href='/static/styles.css'>
+</head>
+<body>
+    <div class='dashboard-container'>
+        <h2>Welcome, {{ username }}</h2>
+        <div class='section'>
+            <h3>Claims</h3>
+            <p>No claims available</p>
+        </div>
+        <div class='section'>
+            <h3>User Profile</h3>
+            <p>Username: {{ username }}</p>
+        </div>
+        <a href='/logout' class='logout-btn'>Logout</a>
+    </div>
+</body>
+</html>

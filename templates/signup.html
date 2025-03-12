@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Insurance Portal</title>
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='images/insurance-bg.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Home Button */
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(90deg, #ff6f61, #ff758c);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 120, 120, 0.8);
+        }
+
+        /* Signup Box */
+        .signup-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff6f61;
+            color: white;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Error Message */
+        .error {
+            color: yellow;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm_password").value;
+            let errorDiv = document.getElementById("error-message");
+
+            if (password !== confirmPassword) {
+                errorDiv.textContent = "Passwords do not match!";
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <a href="{{ url_for('home') }}" class="home-btn">🏠 Home</a>
+
+    <div class="signup-box">
+        <h2>Create an Account</h2>
+        <form method="POST" onsubmit="return validateForm()">
+            <div id="error-message" class="error"></div>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirm_password" placeholder="Confirm Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}" style="color: yellow;">Login</a></p>
+    </div>
+
+</body>
+</html>
