@@ -1,23 +1,121 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel='stylesheet' href='/static/styles.css'>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <style>
+        /* Background Styling */
+        body {
+            background: url("{{ url_for('static', filename='images/insurance-bg.jpg') }}") no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        /* Home Button */
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(90deg, #ff6f61, #ff758c);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 120, 120, 0.8);
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        /* Sections */
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff6f61, #ff758c, #ff7eb3);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 120, 120, 0.8);
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class='dashboard-container'>
+
+    <a href="{{ url_for('home') }}" class="home-btn">Home</a>
+    
+    <div class="dashboard-container">
         <h2>Welcome, {{ username }}</h2>
-        <div class='section'>
+        
+        <div class="section">
             <h3>Claims</h3>
             <p>No claims available</p>
         </div>
-        <div class='section'>
+        
+        <div class="section">
             <h3>User Profile</h3>
-            <p>Username: {{ username }}</p>
+            <p>Your Username: {{ username }}</p>
+            <p>Your Date of Birth: {{ dob }}</p>
         </div>
-        <a href='/logout' class='logout-btn'>Logout</a>
+
+        <a href="/logout" class="logout-btn">Logout</a>
     </div>
+
 </body>
 </html>

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insurance Portal - Welcome</title>
+    <title>Terms and Conditions - Insurance Portal</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
     <style>
         /* Set Static Background */
@@ -12,10 +13,21 @@
             background-size: cover;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Prevent scrolling */
             color: white;
             text-align: center;
+            align-items: center;
             font-family: Arial, sans-serif;
+        }
+
+        /* Overlay Effect */
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
         /* Navbar */
@@ -71,8 +83,8 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 25px;
-            margin-right: 50px;
+            gap: 25px; /* Adjust spacing */
+            margin-right: 50px; /* Shift links to the left */
         }
 
         .nav-links a {
@@ -106,21 +118,21 @@
             position: absolute;
             top: 100%;
             left: 0;
-            width: 140px;
+            width: 130px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
             overflow: hidden;
             text-align: center;
             opacity: 0;
-            transform: translateY(0px);
-            transition: opacity 1.1s ease, transform 1.1s ease;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .dropdown-content a {
             display: block;
-            padding: 12px;
+            padding: 10px;
             color: black;
-            text-decoration:rgba(0, 0, 0, 0.1);
+            text-decoration: none;
             transition: background 0.3s;
         }
 
@@ -135,95 +147,67 @@
             transform: translateY(0);
         }
 
-        /* Content Box */
-        .content {
-            position: absolute;
+        /* Terms Section */
+        .terms-section {
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 600px;
-            padding: 50px;
+            width: 40%;
+            height: 70vh;
+            padding: 30px;
             background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(25px);
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-            animation: fadeIn 1.5s ease-in-out;
+            z-index: 2;
+            overflow-y: hidden;
         }
 
-        /* Title */
-        h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+        .terms-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-align: center;
         }
 
-        /* Subtitle */
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-
-        /* Buttons */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            background: linear-gradient(90deg, #ff6f61, #ff758c, #ff7eb3);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
+        /* Collapsible Terms */
+        .term {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
             cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 120, 120, 0.8);
+        .term:hover {
+            background: rgba(62, 212, 107, 0.726);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 10px;
-            }
+        .icon {
+            font-size: 1.8rem;
+            transition: transform 0.3s;
+        }
 
-            .nav-links {
-                flex-direction: column;
-                gap: 15px;
-                margin-top: 10px;
-                margin-right: 0;
-            }
+        .term-content {
+            display: none;
+            padding: 10px;
+            font-size: 1.2rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-            .nav-links a {
-                font-size: 1rem;
-            }
-
-            .content {
-                width: 95%;
-                padding: 30px;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-
-            .btn {
-                font-size: 1rem;
-                padding: 12px 25px;
-            }
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
@@ -270,14 +254,103 @@
         .github-icon:hover {
             transform: scale(1.2);
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
     </style>
+</head>
+<body>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/company-logo.png') }}" alt="Company Logo" class="logo-img">
+            Insurelife
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('terms') }}">Terms</a>
+            <div class="dropdown">
+                <a href="#">SignUp / Login </a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('signup') }}">Sign Up</a>
+                    <a href="{{ url_for('login') }}">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Section -->
+    <div class="terms-section">
+        <h1>Terms and Conditions</h1>
+
+        <div class="term" onclick="toggleTerm(0)">
+            <span>Policy Coverage</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="term-content">
+            This insurance policy provides coverage for damages, losses, or liabilities as specified in the insurance agreement.
+        </div>
+
+        <div class="term" onclick="toggleTerm(1)">
+            <span>Premium Payments</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="term-content">
+            Policy holders must ensure timely payment of premiums to maintain coverage. Failure to pay may result in policy cancellation.
+        </div>
+
+        <div class="term" onclick="toggleTerm(2)">
+            <span>Claims Process</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="term-content">
+            To file a claim, the policyholder must submit required documentation within the specified timeframe. Claims will be assessed based on policy terms.
+        </div>
+
+        <div class="term" onclick="toggleTerm(3)">
+            <span>Exclusions</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="term-content">
+            Certain events such as intentional damage, fraud, and acts of war may not be covered under this policy.
+        </div>
+
+        <div class="term" onclick="toggleTerm(4)">
+            <span>Policy Cancellation</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="term-content">
+            The insurer reserves the right to cancel the policy in case of fraud, misrepresentation, or non-payment of premiums.
+        </div>
+
+        <div class="term" onclick="toggleTerm(5)">
+            <span>Dispute Resolution</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="term-content">
+            Any disputes will be resolved through arbitration as per the governing laws applicable to this insurance policy.
+        </div>
+
+    </div>
+
     <script>
+        function toggleTerm(index) {
+            const contents = document.querySelectorAll('.term-content');
+            const icons = document.querySelectorAll('.icon');
+
+            if (contents[index].style.display === "block") {
+                contents[index].style.display = "none";
+                icons[index].textContent = "+";
+            } else {
+                contents.forEach((content, i) => {
+                    content.style.display = "none";
+                    icons[i].textContent = "+";
+                });
+                contents[index].style.display = "block";
+                icons[index].textContent = "−";
+            }
+        }
         function updateDateTime() {
             const now = new Date();
             const options = { 
@@ -295,37 +368,6 @@
         setInterval(updateDateTime, 100);
         updateDateTime(); // Run immediately on page load
     </script>
-</head>
-<body>
-
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/company-logo.png') }}" alt="Company Logo" class="logo-img">
-            Insurelife
-        </div>
-        <div class="nav-links">
-            <a href="{{ url_for('about') }}">About</a>
-            <a href="{{ url_for('terms') }}">Terms</a>
-            <div class="dropdown">
-                <a href="#">Sign Up / Login </a>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('signup') }}">Sign Up</a>
-                    <a href="{{ url_for('login') }}">Login</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
-        <h1>Welcome to Our Insurance Portal</h1>
-        <p>Secure your future with our trusted insurance plans.</p>
-        <div class="buttons">
-            <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
-            <a href="{{ url_for('login') }}" class="btn">Login</a>
-        </div>
-    </div>
 
 </body>
 
