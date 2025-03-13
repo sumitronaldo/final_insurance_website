@@ -182,6 +182,51 @@
             transform: scale(1.05);
         }
 
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            text-align: center;
+            justify-content: space-evenly;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-family: Arial, sans-serif;
+        }
+
+        .creator {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .creator {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .github-link {
+            display: inline-block;
+        }
+
+        .github-icon {
+            width: 20px;
+            height: 20px;
+            filter: invert(1); /* Makes the icon white */
+            transition: transform 0.3s;
+        }
+
+        .github-icon:hover {
+            transform: scale(1.2);
+        }
+
 
         /* Fade-in Animation */
         @keyframes fadeIn {
@@ -222,4 +267,13 @@
     </div>
 
 </body>
+<footer>
+    <p id="datetime"></p>
+    <div class="footer-right">
+        <p class="creator">Created by sumit Kumar Behera @2025</p>
+        <a href="https://github.com/sumitronaldo" target="_blank" class="github-link">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/github.svg" alt="GitHub" class="github-icon">
+        </a>
+    </div>
+</footer>
 </html>
