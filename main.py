@@ -96,8 +96,8 @@ def login():
         user = cursor.fetchone()
 
         if user:
-            session['user'] = user[0]  
-            session['dob'] = user[1]   
+            session['user'] = user['username']  
+            session['dob'] = user['dob'] 
             flash("Login successful!", "success")
             return redirect(url_for('dashboard')) 
         else:
