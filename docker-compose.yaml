@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  flask_app:
+    build: .
+    container_name: flask_app
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=admin
+      - DB_PASSWORD=Baripada@123
+      - DB_NAME=user_database
+      - SECRET=Password
+    ports:
+      - "5000:5000"
+    networks:
+      - app_network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - flask_app
+    networks:
+      - app_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Baripada@123  # Set the root password
+      MYSQL_USER: admin
+      MYSQL_DATABASE: user_database        # Set a non-root user
+      MYSQL_PASSWORD: Baripada@123      # Set a password for the non-root user
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+
+volumes:
+  mysql_data:
+
+networks:
+  app_network:
+    driver: bridge
