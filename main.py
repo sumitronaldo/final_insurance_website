@@ -9,7 +9,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-
 app.secret_key = os.getenv('SECRET')
 
 DB_HOST = os.getenv('DB_HOST')
@@ -43,6 +42,7 @@ def get_db_conn():
 db = get_db_conn()
 cursor = db.cursor()
 
+cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}")
 
 def init_db():
     try:
@@ -53,7 +53,6 @@ def init_db():
             cursorclass=pymysql.cursors.DictCursor
         ) 
         cursor = conn.cursor()
-        
         cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}")
         conn.select_db(DB_NAME)
         
@@ -156,4 +155,4 @@ def terms():
 
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
